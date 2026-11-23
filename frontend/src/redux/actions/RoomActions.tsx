@@ -3,23 +3,39 @@ import { Dispatch } from 'redux';
 import * as actions from '../constants/RoomConstants';
 import { IRoom, ICreateReview, TCreateRoom } from '../../interfaces/IRoom';
 
-export const fetchRooms = (keyword: string, numOfBeds: number | string, roomType: string, currentPage: number) => 
-async (dispatch: Dispatch) => {
-    try {
-        dispatch({ type: actions.FETCH_ROOMS_REQUEST });
+export const fetchRooms = (
+  keyword: string,
+  numOfBeds: number | string,
+  roomType: string,
+  currentPage: number
+) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: actions.FETCH_ROOMS_REQUEST });
 
-        const { data } = 
-        await axios.get(`/api/rooms/?keyword=${keyword}&numOfBeds=${numOfBeds}&roomType=${roomType}&pageNumber=${currentPage}`);
+    const params = {
+      keyword,
+      roomType,
+      pageNumber: currentPage,
+      ...(numOfBeds !== "" && numOfBeds !== null && numOfBeds !== undefined
+        ? { numOfBeds }
+        : {}),
+    };
 
-        dispatch({ type: actions.FETCH_ROOMS_SUCCESS, payload: data });
-        
-    } catch (error: any) {
-        dispatch({ 
-            type: actions.FETCH_ROOMS_FAIL, 
-            payload: error.response && error.response.data.message ? 
-            error.response.data.message : error.message });
-    }
-}
+    const { data } = await axios.get("/api/rooms/", { params });
+
+    dispatch({
+      type: actions.FETCH_ROOMS_SUCCESS,
+      payload: data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: actions.FETCH_ROOMS_FAIL,
+      payload: error.response?.data?.detail
+        ? JSON.stringify(error.response.data.detail)
+        : error.message,
+    });
+  }
+};
 
 export const getRoomDetails = (id: IRoom['_id']) => async (dispatch: Dispatch) => {
 

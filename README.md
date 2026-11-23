@@ -1,6 +1,6 @@
 # Hotel Booking — FastAPI + SQLAlchemy
 
-Converted from the included Express/Mongoose server to a Python FastAPI/SQLAlchemy server. The React/Redux frontend is unchanged. FastAPI preserves `/api` URLs and frontend-facing `_id`, `isAdmin`, `checkInDate`, etc. JSON fields.
+Python FastAPI/SQLAlchemy server. The React/Redux frontend. FastAPI preserves `/api` URLs and frontend-facing `_id`, `isAdmin`, `checkInDate`, etc. JSON fields.
 
 ## Start on Ubuntu 24.04
 

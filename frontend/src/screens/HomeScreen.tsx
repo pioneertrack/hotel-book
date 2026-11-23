@@ -21,6 +21,8 @@ const HomeScreen = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { loading, rooms, count, error } = useSelector((state: RootStateOrAny) => state.roomsFetch);
 
+  console.log("==============rooms==================", rooms);
+
   useEffect(() => {
     dispatch(fetchRooms(keyword, numOfBeds, roomType, currentPage));
   }, [dispatch, keyword, numOfBeds, roomType, currentPage]);

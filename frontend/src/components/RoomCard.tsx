@@ -13,7 +13,7 @@ const RoomCard: React.FC<IRoomCard> = (props: IRoomCard) => {
 
   return (
     <Card className="card-room">
-        <Card.Img variant="top" src={images[0].image} />
+        <Card.Img variant="top" src={images.length > 0 ? images[0].image : ""} />
         <Card.Body>
             <Link to={`/room/${_id}`}>
               <Card.Title as="h4">{name}</Card.Title>

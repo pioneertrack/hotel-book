@@ -15,7 +15,7 @@ export const checkRoomBooking = (id: IRoom['_id'], checkInDate: Date, checkOutDa
             }
         }
 
-        await axios.post(`/api/bookings/check`, {id, checkInDate, checkOutDate}, config);
+        await axios.post(`/api/bookings/check`, {roomId: id, checkInDate, checkOutDate}, config);
 
         dispatch({ type: actions.CHECK_ROOM_BOOKING_SUCCESS });
 
